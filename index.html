@@ -389,7 +389,7 @@ footer{background:var(--secondary);padding:50px 30px;margin-top:80px;border-top:
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#" class="logo" onclick="showSection('shop')">BREEDOLL</a>
-        <p>감도 높은 일상을 위한 패션 · 스킨케어 큐레이션</p>
+        <p> 패션 · 스킨케어 · 큐레이션</p>
         <p style="margin-top:8px">
           <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="color:var(--gray);text-decoration:none"><i class="fab fa-instagram"></i> @breedollx</a>
         </p>
@@ -407,13 +407,178 @@ footer{background:var(--secondary);padding:50px 30px;margin-top:80px;border-top:
         <a href="#" onclick="showModal('terms')">이용약관</a>
         <a href="#" onclick="showModal('privacy')">개인정보처리방침</a>
         <a href="#" onclick="showModal('refund')">환불/취소 정책</a>
+<!-- 이용약관 모달 -->
+<div class="modal-bg" id="modal-terms">
+  <div class="modal" style="max-width:700px">
+    <button class="modal-close" onclick="document.getElementById('modal-terms').classList.remove('show')"><i class="fa fa-times"></i></button>
+    <h3>이용약관</h3>
+    <div style="font-size:13px;color:#666;line-height:2;height:500px;overflow-y:auto;padding-right:10px">
+
+      <p><strong>제1조 (목적)</strong><br>
+      본 약관은 BREEDOLL(이하 "회사")이 운영하는 인터넷 쇼핑몰 breedoll.kr(이하 "몰")에서 제공하는 전자상거래 관련 서비스 이용에 관한 사항을 규정함을 목적으로 합니다.</p><br>
+
+      <p><strong>제2조 (정의)</strong><br>
+      ① "몰"이란 회사가 재화 또는 용역을 이용자에게 제공하기 위하여 정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한 가상의 영업장을 말합니다.<br>
+      ② "이용자"란 몰에 접속하여 이 약관에 따라 몰이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.<br>
+      ③ "회원"이란 몰에 개인정보를 제공하여 회원등록을 한 자로서, 몰의 정보를 지속적으로 제공받으며 몰이 제공하는 서비스를 계속적으로 이용할 수 있는 자를 말합니다.</p><br>
+
+      <p><strong>제3조 (약관의 게시와 개정)</strong><br>
+      ① 회사는 이 약관의 내용을 이용자가 쉽게 알 수 있도록 몰의 초기 화면에 게시합니다.<br>
+      ② 회사는 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제에 관한 법률 등 관련법을 위배하지 않는 범위 내에서 이 약관을 개정할 수 있습니다.<br>
+      ③ 약관을 개정할 경우 적용일자 및 개정사유를 명시하여 현행약관과 함께 몰의 초기화면에 그 적용일자 7일 이전부터 공지합니다.</p><br>
+
+      <p><strong>제4조 (서비스 제공 및 변경)</strong><br>
+      ① 회사는 다음과 같은 업무를 수행합니다.<br>
+      1. 재화 또는 용역에 대한 정보 제공 및 구매계약 체결<br>
+      2. 구매계약이 체결된 재화 또는 용역의 배송<br>
+      3. 기타 회사가 정하는 업무</p><br>
+
+      <p><strong>제5조 (구매계약의 성립)</strong><br>
+      ① 이용자는 몰에서 다음과 같은 방법으로 구매를 신청합니다.<br>
+      1. 재화 등의 검색 및 선택<br>
+      2. 성명, 주소, 전화번호 등의 입력<br>
+      3. 약관 내용 확인, 청약철회권 제한 등에 대한 확인<br>
+      4. 재화 등의 구매신청 및 이에 관한 확인<br>
+      5. 결제 방법의 선택<br>
+      ② 회사가 구매신청에 대해 승낙한 경우 구매계약이 성립됩니다.</p><br>
+
+      <p><strong>제6조 (지급방법)</strong><br>
+      몰에서 구매한 재화 또는 용역에 대한 대금지급방법은 다음 중 가능한 방법으로 할 수 있습니다.<br>
+      1. 신용카드 결제<br>
+      2. 간편결제 (카카오페이, 토스페이 등)<br>
+      3. 계좌이체</p><br>
+
+      <p><strong>제7조 (배송)</strong><br>
+      ① 회사는 이용자와 배송시기에 관하여 별도의 약정이 없는 이상, 이용자가 청약을 한 날부터 7일 이내에 재화 등을 배송할 수 있도록 합니다.<br>
+      ② 배송 지연 시 이용자에게 이메일 또는 연락처를 통해 개별 안내합니다.</p><br>
+
+      <p><strong>제8조 (청약철회 등)</strong><br>
+      ① 회사와 재화 등의 구매에 관한 계약을 체결한 이용자는 전자상거래 등에서의 소비자 보호에 관한 법률 제13조 제2항에 따른 계약내용에 관한 서면을 받은 날부터 7일 이내에는 청약을 철회할 수 있습니다.<br>
+      ② 다음의 경우에는 청약철회를 할 수 없습니다.<br>
+      1. 이용자에게 책임 있는 사유로 재화 등이 멸실 또는 훼손된 경우<br>
+      2. 이용자의 사용 또는 일부 소비에 의하여 재화 등의 가치가 현저히 감소한 경우<br>
+      3. 시간이 지나 다시 판매하기 곤란할 정도로 재화 등의 가치가 현저히 감소한 경우</p><br>
+
+      <p><strong>제9조 (개인정보보호)</strong><br>
+      회사는 이용자의 개인정보 수집 시 서비스 제공을 위하여 필요한 최소한의 개인정보를 수집합니다. 개인정보의 처리에 관해서는 개인정보처리방침에 따릅니다.</p><br>
+
+      <p><strong>제10조 (분쟁해결)</strong><br>
+      ① 회사는 이용자가 제기하는 정당한 의견이나 불만을 반영하고 그 피해를 보상처리하기 위하여 피해보상처리기구를 설치·운영합니다.<br>
+      ② 회사와 이용자간에 발생한 분쟁은 전자거래기본법에 의해 설치된 전자거래분쟁조정위원회의 조정에 따를 수 있습니다.</p><br>
+
+      <p><strong>제11조 (재판권 및 준거법)</strong><br>
+      회사와 이용자간에 발생한 분쟁에 관한 소송은 서울중앙지방법원을 관할법원으로 하며, 대한민국 법을 적용합니다.</p><br>
+
+      <p><strong>부칙</strong><br>
+      이 약관은 2024년 1월 1일부터 적용됩니다.<br><br>
+      사업자명 : BREEDOLL<br>
+      대표자 : 노혜리<br>
+      사업자등록번호 : 313-11-86866<br>
+      주소 : 서울특별시 강남구 영동대로138길 9, 202-가<br>
+      이메일 : breecoffee20@gmail.com</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- 개인정보처리방침 모달 -->
+<div class="modal-bg" id="modal-privacy">
+  <div class="modal" style="max-width:700px">
+    <button class="modal-close" onclick="document.getElementById('modal-privacy').classList.remove('show')"><i class="fa fa-times"></i></button>
+    <h3>개인정보처리방침</h3>
+    <div style="font-size:13px;color:#666;line-height:2;height:500px;overflow-y:auto;padding-right:10px">
+
+      <p>BREEDOLL(이하 "회사")은 개인정보보호법에 따라 이용자의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 이용자의 고충을 원활하게 처리할 수 있도록 다음과 같은 처리방침을 두고 있습니다.</p><br>
+
+      <p><strong>제1조 (개인정보의 처리 목적)</strong><br>
+      회사는 다음의 목적을 위하여 개인정보를 처리합니다.<br>
+      ① 서비스 제공에 관한 계약 이행 및 요금정산 : 물품배송, 콘텐츠 제공, 본인인증, 요금결제<br>
+      ② 회원 관리 : 회원제 서비스 이용에 따른 본인확인, 개인 식별<br>
+      ③ 마케팅 및 광고에의 활용 (동의 시) : 신규 서비스 개발, 이벤트 및 광고성 정보 제공</p><br>
+
+      <p><strong>제2조 (개인정보의 처리 및 보유 기간)</strong><br>
+      ① 회사는 법령에 따른 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.<br>
+      ② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.<br>
+      - 구매·결제 정보 : 5년 (전자상거래법)<br>
+      - 불만·분쟁처리 기록 : 3년 (전자상거래법)<br>
+      - 접속 로그 : 3개월 (통신비밀보호법)</p><br>
+
+      <p><strong>제3조 (정보주체의 권리·의무 및 행사방법)</strong><br>
+      이용자는 개인정보주체로서 다음과 같은 권리를 행사할 수 있습니다.<br>
+      ① 개인정보 열람 요구<br>
+      ② 오류 등이 있을 경우 정정 요구<br>
+      ③ 삭제 요구<br>
+      ④ 처리정지 요구</p><br>
+
+      <p><strong>제4조 (처리하는 개인정보의 항목)</strong><br>
+      ① 필수항목 : 이름, 연락처, 배송주소, 이메일<br>
+      ② 자동 수집 : 접속 IP, 쿠키, 방문일시, 서비스 이용기록</p><br>
+
+      <p><strong>제5조 (개인정보의 파기)</strong><br>
+      회사는 개인정보 보유기간 경과 또는 처리목적 달성 후에는 지체없이 해당 개인정보를 파기합니다.<br>
+      - 전자적 파일 형태 : 복구 불가능한 방법으로 영구 삭제<br>
+      - 종이 문서 : 분쇄기로 분쇄 또는 소각</p><br>
+
+      <p><strong>제6조 (개인정보 보호책임자)</strong><br>
+      개인정보 보호책임자 : 노혜리<br>
+      이메일 : breecoffee20@gmail.com</p><br>
+
+      <p><strong>제7조 (개인정보처리방침 변경)</strong><br>
+      이 개인정보처리방침은 2024년 1월 1일부터 적용됩니다. 변경 시 최소 7일 전 공지합니다.</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- 환불/취소 정책 모달 -->
+<div class="modal-bg" id="modal-refund">
+  <div class="modal" style="max-width:700px">
+    <button class="modal-close" onclick="document.getElementById('modal-refund').classList.remove('show')"><i class="fa fa-times"></i></button>
+    <h3>환불 · 취소 정책</h3>
+    <div style="font-size:13px;color:#666;line-height:2;height:500px;overflow-y:auto;padding-right:10px">
+
+      <p><strong>■ 교환 / 반품 신청기간</strong><br>
+      - 단순변심 : 수령 후 7일 이내<br>
+      - 상품 하자 : 수령 후 30일 이내</p><br>
+
+      <p><strong>■ 교환 / 반품 불가 사유</strong><br>
+      - 착용, 세탁, 수선한 경우<br>
+      - 태그 · 라벨 제거 시<br>
+      - 향수 / 화장품류 개봉 후<br>
+      - 고객 부주의로 인한 상품 훼손</p><br>
+
+      <p><strong>■ 환불 처리 기간</strong><br>
+      반품 확인 후 3~5 영업일 이내 처리</p><br>
+
+      <p><strong>■ 환불 방법</strong><br>
+      결제 수단과 동일한 방법으로 환불<br>
+      (신용카드 → 카드 취소, 계좌이체 → 계좌 환불)</p><br>
+
+      <p><strong>■ 배송비 안내</strong><br>
+      - 단순변심 반품 시 : 왕복 배송비 고객 부담<br>
+      - 상품 하자 반품 시 : 배송비 전액 회사 부담</p><br>
+
+      <p><strong>■ 문의</strong><br>
+      이메일 : breecoffee20@gmail.com<br>
+      인스타그램 DM : @breedollx</p>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+        
       </div>
     </div>
 
     <div class="biz-info">
       <strong>BREEDOLL</strong><br>
-      대표자 : 노혜리 &nbsp;|&nbsp; 사업자등록번호 : 313-11-86866<br>
-      통신판매업신고 : 제2024-서울강남-XXXX호<br>
+      대표자 : 노혜리 &nbsp;|&nbsp; 사업자등록번호 : 133-11-86866<br>
+      통신판매업신고 : 제2026-서울강남-XXXX호<br>
       주소 : 서울특별시 강남구 영동대로138길 9, 202-가<br>
       이메일 : <a href="mailto:breecoffee20@gmail.com" style="color:var(--gray)">breecoffee20@gmail.com</a><br>
       인스타그램 : <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="color:var(--gray)">@breedollx</a><br><br>
