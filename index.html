@@ -1,443 +1,423 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2022.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Apple SD Gothic Neo'}
-    span.s1 {font: 12.0px 'Apple SD Gothic Neo'}
-    span.s2 {font: 12.0px 'Apple Color Emoji'}
-    span.s3 {font: 12.0px Helvetica}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BREEDOLL</title>
+<link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#2c2c2c;
+  --secondary:#f7f7f7;
+  --accent:#b0956e;
+  --white:#ffffff;
+  --gray:#999;
+  --light:#e8e8e8;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:var(--primary);line-height:1.6}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;background:#fff;z-index:1000;border-bottom:1px solid var(--light)}
+.header-inner{display:flex;justify-content:space-between;align-items:center;padding:16px 30px;max-width:1400px;margin:0 auto}
+.hamburger{background:none;border:none;font-size:22px;cursor:pointer;color:var(--primary)}
+.logo{font-size:26px;font-weight:700;letter-spacing:5px;color:var(--primary);text-decoration:none}
+.header-right{display:flex;gap:18px;align-items:center}
+.header-right a,.header-right button{color:var(--primary);font-size:18px;text-decoration:none;background:none;border:none;cursor:pointer;position:relative}
+.cart-badge{position:absolute;top:-7px;right:-7px;background:var(--accent);color:#fff;font-size:9px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+/* FIXED CATEGORY NAV */
+.cat-nav{position:fixed;top:62px;left:0;right:0;background:#fff;z-index:999;border-bottom:1px solid var(--light)}
+.cat-nav-inner{display:flex;justify-content:center;gap:40px;padding:14px 0;max-width:1400px;margin:0 auto}
+.cat-nav-inner a{text-decoration:none;color:var(--gray);font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:color .3s;padding-bottom:4px;border-bottom:1px solid transparent}
+.cat-nav-inner a:hover,.cat-nav-inner a.active{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* SIDE MENU */
+.side-menu{position:fixed;top:0;left:-300px;width:300px;height:100vh;background:#fff;z-index:2000;transition:left .35s ease;padding:30px;overflow-y:auto;border-right:1px solid var(--light)}
+.side-menu.open{left:0}
+.side-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+.side-top .logo{font-size:20px}
+.side-close{background:none;border:none;font-size:22px;cursor:pointer}
+.side-links a{display:block;padding:15px 0;text-decoration:none;color:var(--primary);font-size:13px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--light)}
+.side-sub{margin-top:30px}
+.side-sub h5{font-size:11px;color:var(--gray);letter-spacing:1px;margin-bottom:12px}
+.side-sub a{display:block;padding:9px 0;text-decoration:none;color:var(--primary);font-size:13px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1500;opacity:0;visibility:hidden;transition:all .3s}
+.overlay.show{opacity:1;visibility:visible}
+
+/* MAIN */
+main{margin-top:115px}
+.section{display:none;padding:50px 30px;max-width:1400px;margin:0 auto}
+.section.active{display:block}
+
+/* ABOUT */
+.about-wrap{text-align:center;max-width:700px;margin:0 auto;padding:40px 0 60px}
+.about-wrap h2{font-size:30px;font-weight:300;letter-spacing:8px;margin-bottom:30px}
+.about-wrap p{color:var(--gray);font-size:14px;line-height:2;margin-bottom:15px}
+.ig-btn{display:inline-flex;align-items:center;gap:8px;margin-top:25px;padding:12px 28px;border:1px solid var(--primary);text-decoration:none;color:var(--primary);font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:all .3s}
+.ig-btn:hover{background:var(--primary);color:#fff}
+
+/* SHOP */
+.shop-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:15px}
+.filter-btns{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btns button{background:none;border:1px solid var(--light);padding:7px 16px;font-size:12px;color:var(--gray);cursor:pointer;letter-spacing:1px;transition:all .3s}
+.filter-btns button:hover,.filter-btns button.active{border-color:var(--primary);color:var(--primary)}
+.sort-sel select{padding:8px 14px;border:1px solid var(--light);font-size:12px;background:#fff;cursor:pointer}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px}
+.prod-card{cursor:pointer;transition:transform .3s}
+.prod-card:hover{transform:translateY(-4px)}
+.prod-img{position:relative;aspect-ratio:3/4;background:var(--secondary);overflow:hidden}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prod-card:hover .prod-img img{transform:scale(1.04)}
+.prod-badge{position:absolute;top:10px;left:10px;background:var(--primary);color:#fff;padding:4px 9px;font-size:10px;letter-spacing:1px}
+.prod-badge.sale{background:var(--accent)}
+.prod-badge.sold{background:var(--gray)}
+.prod-info{padding:14px 0 10px}
+.prod-name{font-size:13px;margin-bottom:6px}
+.prod-price{font-size:13px;font-weight:600}
+.prod-price .ori{text-decoration:line-through;color:var(--gray);font-weight:400;margin-right:8px;font-size:12px}
+.wishlist-btn{background:none;border:none;position:absolute;top:10px;right:10px;font-size:18px;color:#fff;cursor:pointer;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+
+/* COMMUNITY */
+.comm-header{text-align:center;margin-bottom:35px}
+.comm-header h2{font-size:22px;font-weight:300;letter-spacing:5px;margin-bottom:8px}
+.comm-header a{color:var(--gray);font-size:13px;text-decoration:none}
+.comm-header a:hover{color:var(--primary)}
+.ig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px}
+.ig-item{aspect-ratio:1;background:var(--secondary);overflow:hidden;position:relative;cursor:pointer}
+.ig-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ig-item:hover img{transform:scale(1.06)}
+.ig-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;gap:20px;color:#fff;font-size:14px}
+.ig-item:hover .ig-overlay{opacity:1}
+.ig-notice{background:var(--secondary);padding:20px;text-align:center;margin-top:30px;border-radius:2px}
+.ig-notice p{font-size:13px;color:var(--gray);line-height:1.8}
+.ig-notice a{color:var(--accent);text-decoration:none}
+
+/* Q&A BOARD */
+.qa-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.qa-top h3{font-size:16px;font-weight:400;letter-spacing:3px}
+.qa-write-btn{padding:10px 22px;background:var(--primary);color:#fff;border:none;font-size:12px;letter-spacing:1px;cursor:pointer;transition:background .3s}
+.qa-write-btn:hover{background:var(--accent)}
+.qa-list{border-top:2px solid var(--primary)}
+.qa-item{border-bottom:1px solid var(--light);padding:18px 0}
+.qa-item-top{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.qa-label{display:inline-block;padding:3px 8px;font-size:10px;letter-spacing:1px;margin-right:10px}
+.qa-label.product{background:#f0ede8;color:var(--accent)}
+.qa-label.shipping{background:#eef0f8;color:#6b7dbf}
+.qa-label.other{background:var(--secondary);color:var(--gray)}
+.qa-label.secret{background:#f5f5f5;color:var(--gray)}
+.qa-title{font-size:13px;flex:1}
+.qa-meta{font-size:11px;color:var(--gray);display:flex;gap:15px}
+.qa-answer{display:none;margin-top:14px;padding:16px;background:var(--secondary);font-size:13px;color:var(--gray);line-height:1.9}
+.qa-answer.show{display:block}
+.qa-answer strong{color:var(--primary)}
+.dm-float{position:fixed;bottom:30px;right:30px;z-index:800;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.dm-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:30px;text-decoration:none;font-size:13px;font-weight:500;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 15px rgba(0,0,0,.15)}
+.dm-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.dm-btn.insta{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
+.dm-btn.kakao{background:#FEE500;color:#3C1E1E}
+
+/* WRITE MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;display:none;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal{background:#fff;width:90%;max-width:560px;padding:36px;position:relative;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:18px;font-weight:400;letter-spacing:3px;margin-bottom:25px}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer}
+.form-row{margin-bottom:18px}
+.form-row label{display:block;font-size:12px;color:var(--gray);margin-bottom:7px;letter-spacing:1px}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:11px 14px;border:1px solid var(--light);font-size:13px;outline:none;transition:border .3s;font-family:inherit}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--primary)}
+.form-row textarea{height:130px;resize:vertical}
+.form-row .secret-check{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.form-row .secret-check input{width:auto;padding:0}
+.submit-btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;font-size:13px;letter-spacing:2px;cursor:pointer;transition:background .3s}
+.submit-btn:hover{background:var(--accent)}
+
+/* CART SIDEBAR */
+.cart-sidebar{position:fixed;top:0;right:-380px;width:380px;height:100vh;background:#fff;z-index:2000;transition:right .35s ease;padding:30px;overflow-y:auto;border-left:1px solid var(--light)}
+.cart-sidebar.open{right:0}
+.cart-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.cart-top h3{font-size:16px;font-weight:400;letter-spacing:3px}
+.cart-close{background:none;border:none;font-size:22px;cursor:pointer}
+.cart-empty{text-align:center;padding:60px 0;color:var(--gray);font-size:13px}
+.cart-items{display:flex;flex-direction:column;gap:20px}
+.cart-item{display:flex;gap:14px;padding-bottom:20px;border-bottom:1px solid var(--light)}
+.cart-item-img{width:80px;height:100px;background:var(--secondary);flex-shrink:0;overflow:hidden}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1}
+.cart-item-name{font-size:13px;margin-bottom:5px}
+.cart-item-price{font-size:13px;font-weight:600;color:var(--accent)}
+.cart-item-qty{display:flex;align-items:center;gap:10px;margin-top:10px}
+.cart-item-qty button{width:26px;height:26px;border:1px solid var(--light);background:none;cursor:pointer;font-size:14px}
+.cart-item-qty span{font-size:13px;min-width:20px;text-align:center}
+.cart-remove{background:none;border:none;color:var(--gray);cursor:pointer;font-size:12px;margin-top:8px;padding:0;letter-spacing:1px}
+.cart-footer{margin-top:25px;padding-top:20px;border-top:2px solid var(--primary)}
+.cart-total{display:flex;justify-content:space-between;margin-bottom:20px;font-size:14px}
+.cart-total strong{font-weight:600}
+.checkout-btn{display:block;width:100%;padding:15px;background:var(--primary);color:#fff;text-align:center;text-decoration:none;font-size:13px;letter-spacing:2px;border:none;cursor:pointer;transition:background .3s;margin-bottom:10px}
+.checkout-btn:hover{background:var(--accent)}
+.safe-badge{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:15px;padding:12px;background:var(--secondary);font-size:11px;color:var(--gray)}
+
+/* PRODUCT MODAL */
+.prod-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px}
+.prod-modal-bg.show{display:flex}
+.prod-modal{background:#fff;width:90%;max-width:900px;display:flex;gap:0;max-height:90vh;overflow:hidden}
+.prod-modal-img{width:50%;background:var(--secondary)}
+.prod-modal-img img{width:100%;height:100%;object-fit:cover}
+.prod-modal-info{width:50%;padding:40px;overflow-y:auto}
+.prod-modal-close{position:absolute;top:20px;right:20px;background:#fff;border:none;font-size:22px;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.prod-modal-info h3{font-size:20px;font-weight:400;margin-bottom:10px;line-height:1.4}
+.prod-modal-info .price{font-size:22px;font-weight:600;color:var(--primary);margin-bottom:25px}
+.prod-modal-info .ori{font-size:14px;text-decoration:line-through;color:var(--gray);font-weight:400;margin-right:10px}
+.prod-modal-info .desc{font-size:13px;color:var(--gray);line-height:1.9;margin-bottom:25px;padding-bottom:25px;border-bottom:1px solid var(--light)}
+.option-row{margin-bottom:15px}
+.option-row label{display:block;font-size:12px;color:var(--gray);margin-bottom:7px;letter-spacing:1px}
+.option-row select{width:100%;padding:10px;border:1px solid var(--light);font-size:13px;background:#fff}
+.qty-row{display:flex;align-items:center;gap:12px;margin:20px 0}
+.qty-row label{font-size:12px;color:var(--gray);letter-spacing:1px;width:60px}
+.qty-ctrl{display:flex;align-items:center;gap:8px}
+.qty-ctrl button{width:30px;height:30px;border:1px solid var(--light);background:none;cursor:pointer;font-size:16px}
+.qty-ctrl span{width:30px;text-align:center;font-size:14px}
+.add-cart-btn{width:100%;padding:15px;background:var(--primary);color:#fff;border:none;font-size:13px;letter-spacing:2px;cursor:pointer;margin-top:10px;transition:background .3s}
+.add-cart-btn:hover{background:var(--accent)}
+
+/* FOOTER */
+footer{background:var(--secondary);padding:50px 30px;margin-top:80px;border-top:1px solid var(--light)}
+.footer-inner{max-width:1400px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--light)}
+.footer-brand .logo{font-size:22px}
+.footer-brand p{font-size:12px;color:var(--gray);margin-top:10px;line-height:1.8}
+.footer-links h5{font-size:12px;letter-spacing:2px;margin-bottom:15px}
+.footer-links a{display:block;font-size:12px;color:var(--gray);text-decoration:none;margin-bottom:8px;transition:color .3s}
+.footer-links a:hover{color:var(--primary)}
+.footer-bottom{font-size:11px;color:var(--gray);line-height:2}
+.footer-bottom strong{color:var(--primary)}
+.biz-info{margin-top:20px;padding-top:20px;border-top:1px solid var(--light);font-size:11px;color:var(--gray);line-height:2.2}
+.safe-service{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;border:1px solid var(--light);font-size:11px;color:var(--gray);cursor:pointer;transition:all .3s;text-decoration:none}
+.safe-service:hover{border-color:var(--primary);color:var(--primary)}
+.pg-logos{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
+.pg-logo{padding:4px 10px;border:1px solid var(--light);font-size:10px;color:var(--gray);letter-spacing:1px}
+
+@media(max-width:768px){
+  .cat-nav-inner{gap:18px;padding:12px 15px;overflow-x:auto;justify-content:flex-start}
+  .cat-nav-inner a{font-size:11px;white-space:nowrap}
+  .header-inner{padding:14px 18px}
+  .logo{font-size:22px}
+  .section{padding:30px 18px}
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .prod-modal{flex-direction:column;max-height:95vh}
+  .prod-modal-img{width:100%;height:250px}
+  .prod-modal-info{width:100%;padding:25px}
+  .cart-sidebar{width:100%}
+  .footer-top{flex-direction:column}
+  main{margin-top:108px}
+}
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="ko"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1">&lt;title&gt;BREEDOLL&lt;/title&gt;</p>
-<p class="p1">&lt;link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)"&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1">*{margin:0;padding:0;box-sizing:border-box}</p>
-<p class="p1">:root{</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--primary:#2c2c2c;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--secondary:#f7f7f7;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--accent:#b0956e;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--white:#ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--gray:#999;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>--light:#e8e8e8;</p>
-<p class="p1">}</p>
-<p class="p1">body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:var(--primary);line-height:1.6}</p>
-<p class="p2"><br></p>
-<p class="p1">/* HEADER */</p>
-<p class="p1">header{position:fixed;top:0;left:0;right:0;background:#fff;z-index:1000;border-bottom:1px solid var(--light)}</p>
-<p class="p1">.header-inner{display:flex;justify-content:space-between;align-items:center;padding:16px 30px;max-width:1400px;margin:0 auto}</p>
-<p class="p1">.hamburger{background:none;border:none;font-size:22px;cursor:pointer;color:var(--primary)}</p>
-<p class="p1">.logo{font-size:26px;font-weight:700;letter-spacing:5px;color:var(--primary);text-decoration:none}</p>
-<p class="p1">.header-right{display:flex;gap:18px;align-items:center}</p>
-<p class="p1">.header-right a,.header-right button{color:var(--primary);font-size:18px;text-decoration:none;background:none;border:none;cursor:pointer;position:relative}</p>
-<p class="p1">.cart-badge{position:absolute;top:-7px;right:-7px;background:var(--accent);color:#fff;font-size:9px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}</p>
-<p class="p2"><br></p>
-<p class="p1">/* FIXED CATEGORY NAV */</p>
-<p class="p1">.cat-nav{position:fixed;top:62px;left:0;right:0;background:#fff;z-index:999;border-bottom:1px solid var(--light)}</p>
-<p class="p1">.cat-nav-inner{display:flex;justify-content:center;gap:40px;padding:14px 0;max-width:1400px;margin:0 auto}</p>
-<p class="p1">.cat-nav-inner a{text-decoration:none;color:var(--gray);font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:color .3s;padding-bottom:4px;border-bottom:1px solid transparent}</p>
-<p class="p1">.cat-nav-inner a:hover,.cat-nav-inner a.active{color:var(--primary);border-bottom-color:var(--primary)}</p>
-<p class="p2"><br></p>
-<p class="p1">/* SIDE MENU */</p>
-<p class="p1">.side-menu{position:fixed;top:0;left:-300px;width:300px;height:100vh;background:#fff;z-index:2000;transition:left .35s ease;padding:30px;overflow-y:auto;border-right:1px solid var(--light)}</p>
-<p class="p1">.side-menu.open{left:0}</p>
-<p class="p1">.side-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}</p>
-<p class="p1">.side-top .logo{font-size:20px}</p>
-<p class="p1">.side-close{background:none;border:none;font-size:22px;cursor:pointer}</p>
-<p class="p1">.side-links a{display:block;padding:15px 0;text-decoration:none;color:var(--primary);font-size:13px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--light)}</p>
-<p class="p1">.side-sub{margin-top:30px}</p>
-<p class="p1">.side-sub h5{font-size:11px;color:var(--gray);letter-spacing:1px;margin-bottom:12px}</p>
-<p class="p1">.side-sub a{display:block;padding:9px 0;text-decoration:none;color:var(--primary);font-size:13px}</p>
-<p class="p1">.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1500;opacity:0;visibility:hidden;transition:all .3s}</p>
-<p class="p1">.overlay.show{opacity:1;visibility:visible}</p>
-<p class="p2"><br></p>
-<p class="p1">/* MAIN */</p>
-<p class="p1">main{margin-top:115px}</p>
-<p class="p1">.section{display:none;padding:50px 30px;max-width:1400px;margin:0 auto}</p>
-<p class="p1">.section.active{display:block}</p>
-<p class="p2"><br></p>
-<p class="p1">/* ABOUT */</p>
-<p class="p1">.about-wrap{text-align:center;max-width:700px;margin:0 auto;padding:40px 0 60px}</p>
-<p class="p1">.about-wrap h2{font-size:30px;font-weight:300;letter-spacing:8px;margin-bottom:30px}</p>
-<p class="p1">.about-wrap p{color:var(--gray);font-size:14px;line-height:2;margin-bottom:15px}</p>
-<p class="p1">.ig-btn{display:inline-flex;align-items:center;gap:8px;margin-top:25px;padding:12px 28px;border:1px solid var(--primary);text-decoration:none;color:var(--primary);font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:all .3s}</p>
-<p class="p1">.ig-btn:hover{background:var(--primary);color:#fff}</p>
-<p class="p2"><br></p>
-<p class="p1">/* SHOP */</p>
-<p class="p1">.shop-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:15px}</p>
-<p class="p1">.filter-btns{display:flex;gap:8px;flex-wrap:wrap}</p>
-<p class="p1">.filter-btns button{background:none;border:1px solid var(--light);padding:7px 16px;font-size:12px;color:var(--gray);cursor:pointer;letter-spacing:1px;transition:all .3s}</p>
-<p class="p1">.filter-btns button:hover,.filter-btns button.active{border-color:var(--primary);color:var(--primary)}</p>
-<p class="p1">.sort-sel select{padding:8px 14px;border:1px solid var(--light);font-size:12px;background:#fff;cursor:pointer}</p>
-<p class="p1">.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px}</p>
-<p class="p1">.prod-card{cursor:pointer;transition:transform .3s}</p>
-<p class="p1">.prod-card:hover{transform:translateY(-4px)}</p>
-<p class="p1">.prod-img{position:relative;aspect-ratio:3/4;background:var(--secondary);overflow:hidden}</p>
-<p class="p1">.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}</p>
-<p class="p1">.prod-card:hover .prod-img img{transform:scale(1.04)}</p>
-<p class="p1">.prod-badge{position:absolute;top:10px;left:10px;background:var(--primary);color:#fff;padding:4px 9px;font-size:10px;letter-spacing:1px}</p>
-<p class="p1">.prod-badge.sale{background:var(--accent)}</p>
-<p class="p1">.prod-badge.sold{background:var(--gray)}</p>
-<p class="p1">.prod-info{padding:14px 0 10px}</p>
-<p class="p1">.prod-name{font-size:13px;margin-bottom:6px}</p>
-<p class="p1">.prod-price{font-size:13px;font-weight:600}</p>
-<p class="p1">.prod-price .ori{text-decoration:line-through;color:var(--gray);font-weight:400;margin-right:8px;font-size:12px}</p>
-<p class="p1">.wishlist-btn{background:none;border:none;position:absolute;top:10px;right:10px;font-size:18px;color:#fff;cursor:pointer;text-shadow:0 1px 3px rgba(0,0,0,.3)}</p>
-<p class="p2"><br></p>
-<p class="p1">/* COMMUNITY */</p>
-<p class="p1">.comm-header{text-align:center;margin-bottom:35px}</p>
-<p class="p1">.comm-header h2{font-size:22px;font-weight:300;letter-spacing:5px;margin-bottom:8px}</p>
-<p class="p1">.comm-header a{color:var(--gray);font-size:13px;text-decoration:none}</p>
-<p class="p1">.comm-header a:hover{color:var(--primary)}</p>
-<p class="p1">.ig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px}</p>
-<p class="p1">.ig-item{aspect-ratio:1;background:var(--secondary);overflow:hidden;position:relative;cursor:pointer}</p>
-<p class="p1">.ig-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s}</p>
-<p class="p1">.ig-item:hover img{transform:scale(1.06)}</p>
-<p class="p1">.ig-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;gap:20px;color:#fff;font-size:14px}</p>
-<p class="p1">.ig-item:hover .ig-overlay{opacity:1}</p>
-<p class="p1">.ig-notice{background:var(--secondary);padding:20px;text-align:center;margin-top:30px;border-radius:2px}</p>
-<p class="p1">.ig-notice p{font-size:13px;color:var(--gray);line-height:1.8}</p>
-<p class="p1">.ig-notice a{color:var(--accent);text-decoration:none}</p>
-<p class="p2"><br></p>
-<p class="p1">/* Q&amp;A BOARD */</p>
-<p class="p1">.qa-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}</p>
-<p class="p1">.qa-top h3{font-size:16px;font-weight:400;letter-spacing:3px}</p>
-<p class="p1">.qa-write-btn{padding:10px 22px;background:var(--primary);color:#fff;border:none;font-size:12px;letter-spacing:1px;cursor:pointer;transition:background .3s}</p>
-<p class="p1">.qa-write-btn:hover{background:var(--accent)}</p>
-<p class="p1">.qa-list{border-top:2px solid var(--primary)}</p>
-<p class="p1">.qa-item{border-bottom:1px solid var(--light);padding:18px 0}</p>
-<p class="p1">.qa-item-top{display:flex;justify-content:space-between;align-items:center;cursor:pointer}</p>
-<p class="p1">.qa-label{display:inline-block;padding:3px 8px;font-size:10px;letter-spacing:1px;margin-right:10px}</p>
-<p class="p1">.qa-label.product{background:#f0ede8;color:var(--accent)}</p>
-<p class="p1">.qa-label.shipping{background:#eef0f8;color:#6b7dbf}</p>
-<p class="p1">.qa-label.other{background:var(--secondary);color:var(--gray)}</p>
-<p class="p1">.qa-label.secret{background:#f5f5f5;color:var(--gray)}</p>
-<p class="p1">.qa-title{font-size:13px;flex:1}</p>
-<p class="p1">.qa-meta{font-size:11px;color:var(--gray);display:flex;gap:15px}</p>
-<p class="p1">.qa-answer{display:none;margin-top:14px;padding:16px;background:var(--secondary);font-size:13px;color:var(--gray);line-height:1.9}</p>
-<p class="p1">.qa-answer.show{display:block}</p>
-<p class="p1">.qa-answer strong{color:var(--primary)}</p>
-<p class="p1">.dm-float{position:fixed;bottom:30px;right:30px;z-index:800;display:flex;flex-direction:column;gap:10px;align-items:flex-end}</p>
-<p class="p1">.dm-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:30px;text-decoration:none;font-size:13px;font-weight:500;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 15px rgba(0,0,0,.15)}</p>
-<p class="p1">.dm-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2)}</p>
-<p class="p1">.dm-btn.insta{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}</p>
-<p class="p1">.dm-btn.kakao{background:#FEE500;color:#3C1E1E}</p>
-<p class="p2"><br></p>
-<p class="p1">/* WRITE MODAL */</p>
-<p class="p1">.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;display:none;align-items:center;justify-content:center}</p>
-<p class="p1">.modal-bg.show{display:flex}</p>
-<p class="p1">.modal{background:#fff;width:90%;max-width:560px;padding:36px;position:relative;max-height:90vh;overflow-y:auto}</p>
-<p class="p1">.modal h3{font-size:18px;font-weight:400;letter-spacing:3px;margin-bottom:25px}</p>
-<p class="p1">.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer}</p>
-<p class="p1">.form-row{margin-bottom:18px}</p>
-<p class="p1">.form-row label{display:block;font-size:12px;color:var(--gray);margin-bottom:7px;letter-spacing:1px}</p>
-<p class="p1">.form-row input,.form-row select,.form-row textarea{width:100%;padding:11px 14px;border:1px solid var(--light);font-size:13px;outline:none;transition:border .3s;font-family:inherit}</p>
-<p class="p1">.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--primary)}</p>
-<p class="p1">.form-row textarea{height:130px;resize:vertical}</p>
-<p class="p1">.form-row .secret-check{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}</p>
-<p class="p1">.form-row .secret-check input{width:auto;padding:0}</p>
-<p class="p1">.submit-btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;font-size:13px;letter-spacing:2px;cursor:pointer;transition:background .3s}</p>
-<p class="p1">.submit-btn:hover{background:var(--accent)}</p>
-<p class="p2"><br></p>
-<p class="p1">/* CART SIDEBAR */</p>
-<p class="p1">.cart-sidebar{position:fixed;top:0;right:-380px;width:380px;height:100vh;background:#fff;z-index:2000;transition:right .35s ease;padding:30px;overflow-y:auto;border-left:1px solid var(--light)}</p>
-<p class="p1">.cart-sidebar.open{right:0}</p>
-<p class="p1">.cart-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}</p>
-<p class="p1">.cart-top h3{font-size:16px;font-weight:400;letter-spacing:3px}</p>
-<p class="p1">.cart-close{background:none;border:none;font-size:22px;cursor:pointer}</p>
-<p class="p1">.cart-empty{text-align:center;padding:60px 0;color:var(--gray);font-size:13px}</p>
-<p class="p1">.cart-items{display:flex;flex-direction:column;gap:20px}</p>
-<p class="p1">.cart-item{display:flex;gap:14px;padding-bottom:20px;border-bottom:1px solid var(--light)}</p>
-<p class="p1">.cart-item-img{width:80px;height:100px;background:var(--secondary);flex-shrink:0;overflow:hidden}</p>
-<p class="p1">.cart-item-img img{width:100%;height:100%;object-fit:cover}</p>
-<p class="p1">.cart-item-info{flex:1}</p>
-<p class="p1">.cart-item-name{font-size:13px;margin-bottom:5px}</p>
-<p class="p1">.cart-item-price{font-size:13px;font-weight:600;color:var(--accent)}</p>
-<p class="p1">.cart-item-qty{display:flex;align-items:center;gap:10px;margin-top:10px}</p>
-<p class="p1">.cart-item-qty button{width:26px;height:26px;border:1px solid var(--light);background:none;cursor:pointer;font-size:14px}</p>
-<p class="p1">.cart-item-qty span{font-size:13px;min-width:20px;text-align:center}</p>
-<p class="p1">.cart-remove{background:none;border:none;color:var(--gray);cursor:pointer;font-size:12px;margin-top:8px;padding:0;letter-spacing:1px}</p>
-<p class="p1">.cart-footer{margin-top:25px;padding-top:20px;border-top:2px solid var(--primary)}</p>
-<p class="p1">.cart-total{display:flex;justify-content:space-between;margin-bottom:20px;font-size:14px}</p>
-<p class="p1">.cart-total strong{font-weight:600}</p>
-<p class="p1">.checkout-btn{display:block;width:100%;padding:15px;background:var(--primary);color:#fff;text-align:center;text-decoration:none;font-size:13px;letter-spacing:2px;border:none;cursor:pointer;transition:background .3s;margin-bottom:10px}</p>
-<p class="p1">.checkout-btn:hover{background:var(--accent)}</p>
-<p class="p1">.safe-badge{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:15px;padding:12px;background:var(--secondary);font-size:11px;color:var(--gray)}</p>
-<p class="p2"><br></p>
-<p class="p1">/* PRODUCT MODAL */</p>
-<p class="p1">.prod-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px}</p>
-<p class="p1">.prod-modal-bg.show{display:flex}</p>
-<p class="p1">.prod-modal{background:#fff;width:90%;max-width:900px;display:flex;gap:0;max-height:90vh;overflow:hidden}</p>
-<p class="p1">.prod-modal-img{width:50%;background:var(--secondary)}</p>
-<p class="p1">.prod-modal-img img{width:100%;height:100%;object-fit:cover}</p>
-<p class="p1">.prod-modal-info{width:50%;padding:40px;overflow-y:auto}</p>
-<p class="p1">.prod-modal-close{position:absolute;top:20px;right:20px;background:#fff;border:none;font-size:22px;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}</p>
-<p class="p1">.prod-modal-info h3{font-size:20px;font-weight:400;margin-bottom:10px;line-height:1.4}</p>
-<p class="p1">.prod-modal-info .price{font-size:22px;font-weight:600;color:var(--primary);margin-bottom:25px}</p>
-<p class="p1">.prod-modal-info .ori{font-size:14px;text-decoration:line-through;color:var(--gray);font-weight:400;margin-right:10px}</p>
-<p class="p1">.prod-modal-info .desc{font-size:13px;color:var(--gray);line-height:1.9;margin-bottom:25px;padding-bottom:25px;border-bottom:1px solid var(--light)}</p>
-<p class="p1">.option-row{margin-bottom:15px}</p>
-<p class="p1">.option-row label{display:block;font-size:12px;color:var(--gray);margin-bottom:7px;letter-spacing:1px}</p>
-<p class="p1">.option-row select{width:100%;padding:10px;border:1px solid var(--light);font-size:13px;background:#fff}</p>
-<p class="p1">.qty-row{display:flex;align-items:center;gap:12px;margin:20px 0}</p>
-<p class="p1">.qty-row label{font-size:12px;color:var(--gray);letter-spacing:1px;width:60px}</p>
-<p class="p1">.qty-ctrl{display:flex;align-items:center;gap:8px}</p>
-<p class="p1">.qty-ctrl button{width:30px;height:30px;border:1px solid var(--light);background:none;cursor:pointer;font-size:16px}</p>
-<p class="p1">.qty-ctrl span{width:30px;text-align:center;font-size:14px}</p>
-<p class="p1">.add-cart-btn{width:100%;padding:15px;background:var(--primary);color:#fff;border:none;font-size:13px;letter-spacing:2px;cursor:pointer;margin-top:10px;transition:background .3s}</p>
-<p class="p1">.add-cart-btn:hover{background:var(--accent)}</p>
-<p class="p2"><br></p>
-<p class="p1">/* FOOTER */</p>
-<p class="p1">footer{background:var(--secondary);padding:50px 30px;margin-top:80px;border-top:1px solid var(--light)}</p>
-<p class="p1">.footer-inner{max-width:1400px;margin:0 auto}</p>
-<p class="p1">.footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--light)}</p>
-<p class="p1">.footer-brand .logo{font-size:22px}</p>
-<p class="p1">.footer-brand p{font-size:12px;color:var(--gray);margin-top:10px;line-height:1.8}</p>
-<p class="p1">.footer-links h5{font-size:12px;letter-spacing:2px;margin-bottom:15px}</p>
-<p class="p1">.footer-links a{display:block;font-size:12px;color:var(--gray);text-decoration:none;margin-bottom:8px;transition:color .3s}</p>
-<p class="p1">.footer-links a:hover{color:var(--primary)}</p>
-<p class="p1">.footer-bottom{font-size:11px;color:var(--gray);line-height:2}</p>
-<p class="p1">.footer-bottom strong{color:var(--primary)}</p>
-<p class="p1">.biz-info{margin-top:20px;padding-top:20px;border-top:1px solid var(--light);font-size:11px;color:var(--gray);line-height:2.2}</p>
-<p class="p1">.safe-service{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;border:1px solid var(--light);font-size:11px;color:var(--gray);cursor:pointer;transition:all .3s;text-decoration:none}</p>
-<p class="p1">.safe-service:hover{border-color:var(--primary);color:var(--primary)}</p>
-<p class="p1">.pg-logos{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}</p>
-<p class="p1">.pg-logo{padding:4px 10px;border:1px solid var(--light);font-size:10px;color:var(--gray);letter-spacing:1px}</p>
-<p class="p2"><br></p>
-<p class="p1">@media(max-width:768px){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cat-nav-inner{gap:18px;padding:12px 15px;overflow-x:auto;justify-content:flex-start}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cat-nav-inner a{font-size:11px;white-space:nowrap}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.header-inner{padding:14px 18px}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.logo{font-size:22px}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section{padding:30px 18px}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.prod-grid{grid-template-columns:repeat(2,1fr);gap:14px}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.prod-modal{flex-direction:column;max-height:95vh}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.prod-modal-img{width:100%;height:250px}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.prod-modal-info{width:100%;padding:25px}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.cart-sidebar{width:100%}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.footer-top{flex-direction:column}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>main{margin-top:108px}</p>
-<p class="p1">}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- SIDE MENU --&gt;</p>
-<p class="p1">&lt;div class="side-menu" id="sideMenu"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="side-top"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" class="logo"&gt;BREEDOLL&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="side-close" onclick="closeSide()"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="side-links"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('about');closeSide()"&gt;About&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('shop');closeSide()"&gt;Shop&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('community');closeSide()"&gt;Community&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('qa');closeSide()"&gt;1:1 Q&amp;A&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="side-sub"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h5&gt;SHOP CATEGORY&lt;/h5&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">패션</span>');closeSide()"&gt;Fashion&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">의류</span>');closeSide()"&gt;Clothing&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">액세서리</span>');closeSide()"&gt;Accessories&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">스킨케어</span>');closeSide()"&gt;Skincare&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="side-sub" style="margin-top:30px"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" onclick="showSection('qa');closeSide()" style="font-size:12px;color:var(--gray);letter-spacing:1px"&gt;<span class="s2">📋</span> 1:1 <span class="s1">문의하기</span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="font-size:12px;color:var(--gray);letter-spacing:1px;margin-top:8px"&gt;<span class="s2">📷</span> @breedollx&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;div class="overlay" id="overlay" onclick="closeSide();closeCart()"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- HEADER --&gt;</p>
-<p class="p1">&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header-inner"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="hamburger" onclick="openSide()"&gt;&lt;i class="fa fa-bars"&gt;&lt;/i&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" class="logo" onclick="showSection('shop')"&gt;BREEDOLL&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-right"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;a href="[instagram.com](https://instagram.com/breedollx)" target="_blank"&gt;&lt;i class="fab fa-instagram"&gt;&lt;/i&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button onclick="openCart()"&gt;&lt;i class="fa fa-shopping-bag"&gt;&lt;/i&gt;&lt;span class="cart-badge" id="cartBadge"&gt;0&lt;/span&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- FIXED CATEGORY TAB --&gt;</p>
-<p class="p1">&lt;nav class="cat-nav"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="cat-nav-inner"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" id="tab-about" onclick="showSection('about')"&gt;About&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" id="tab-shop" class="active" onclick="showSection('shop')"&gt;Shop&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" id="tab-community" onclick="showSection('community')"&gt;Community&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" id="tab-qa" onclick="showSection('qa')"&gt;1:1 Q&amp;A&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/nav&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- MAIN --&gt;</p>
-<p class="p1">&lt;main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- ABOUT --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="section" id="about"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="about-wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;BREEDOLL&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;<span class="s1">안녕하세요</span>, BREEDOLL<span class="s1">입니다</span>.&lt;br&gt;<span class="s1">일상의</span> <span class="s1">감도를</span> <span class="s1">높이는</span> <span class="s1">패션</span>, <span class="s1">의류</span>, <span class="s1">액세서리</span>, <span class="s1">스킨케어를</span> <span class="s1">큐레이션합니다</span>.&lt;/p&gt;</p>
-<p class="p3"><span class="s3"><span class="Apple-converted-space">      </span>&lt;p&gt;</span>감각적이고<span class="s3"> </span>실용적인<span class="s3"> </span>아이템을<span class="s3"> </span>직접<span class="s3"> </span>사용해보고<span class="s3"> </span>선별하여<span class="s3"> </span>소개합니다<span class="s3">.&lt;br&gt;</span>나만의<span class="s3"> </span>무드를<span class="s3"> </span>담은<span class="s3"> </span>라이프스타일을<span class="s3"> </span>함께<span class="s3"> </span>만들어가요<span class="s3">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;<span class="s1">대표</span> : <span class="s1">노혜리</span> &amp;nbsp;|&amp;nbsp; @breedollx&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" class="ig-btn"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;i class="fab fa-instagram"&gt;&lt;/i&gt; @breedollx</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SHOP --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="section active" id="shop"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="shop-top"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="filter-btns"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="active" onclick="filterProd('all',this)"&gt;ALL&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="filterProd('<span class="s1">패션</span>',this)"&gt;FASHION&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="filterProd('<span class="s1">의류</span>',this)"&gt;CLOTHING&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="filterProd('<span class="s1">액세서리</span>',this)"&gt;ACCESSORIES&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="filterProd('<span class="s1">스킨케어</span>',this)"&gt;SKINCARE&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="sort-sel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;select onchange="sortProd(this.value)"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value="newest"&gt;<span class="s1">신상품순</span>&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value="low"&gt;<span class="s1">낮은가격순</span>&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value="high"&gt;<span class="s1">높은가격순</span>&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="prod-grid" id="prodGrid"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- COMMUNITY --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="section" id="community"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="comm-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;INSTAGRAM&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;a href="[instagram.com](https://instagram.com/breedollx)" target="_blank"&gt;@breedollx &amp;nbsp;&lt;i class="fab fa-instagram"&gt;&lt;/i&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ig-grid" id="igGrid"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="ig-notice"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;<span class="s1">실제</span> <span class="s1">인스타그램</span> <span class="s1">피드를</span> <span class="s1">연동하려면</span> Instagram Basic Display API <span class="s1">또는</span>&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;a href="[behold.so](https://behold.so)" target="_blank"&gt;behold.so&lt;/a&gt; / &lt;a href="[instafeed.js.org](https://instafeed.js.org)" target="_blank"&gt;instafeed.js&lt;/a&gt; <span class="s1">등의</span> <span class="s1">서비스를</span> <span class="s1">통해</span> <span class="s1">연동하세요</span>.&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span><span class="s1">인스타그램</span> <span class="s1">계정</span> : &lt;a href="[instagram.com](https://instagram.com/breedollx)" target="_blank"&gt;@breedollx&lt;/a&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Q&amp;A --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="section" id="qa"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="qa-top"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;1:1 Q&amp;A&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="qa-write-btn" onclick="document.getElementById('writeModal').classList.add('show')"&gt;<span class="s1">문의</span> <span class="s1">작성하기</span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="qa-list" id="qaList"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- CART SIDEBAR --&gt;</p>
-<p class="p1">&lt;div class="cart-sidebar" id="cartSidebar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="cart-top"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;CART&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="cart-close" onclick="closeCart()"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="cartContent"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="cartFooter"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- PRODUCT MODAL --&gt;</p>
-<p class="p1">&lt;div class="prod-modal-bg" id="prodModal"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;button class="prod-modal-close" onclick="closeProdModal()"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="prod-modal" id="prodModalInner"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- WRITE MODAL --&gt;</p>
-<p class="p1">&lt;div class="modal-bg" id="writeModal"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="modal"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="modal-close" onclick="document.getElementById('writeModal').classList.remove('show')"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;<span class="s1">문의하기</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="form-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;<span class="s1">문의</span> <span class="s1">유형</span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;select id="qaType"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="product"&gt;<span class="s1">상품</span> <span class="s1">문의</span>&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="shipping"&gt;<span class="s1">배송</span> <span class="s1">문의</span>&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="other"&gt;<span class="s1">기타</span> <span class="s1">문의</span>&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="form-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;<span class="s1">이름</span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="qaName" placeholder="<span class="s1">이름을</span> <span class="s1">입력해주세요</span>"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="form-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;<span class="s1">제목</span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="qaSubject" placeholder="<span class="s1">제목을</span> <span class="s1">입력해주세요</span>"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="form-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;<span class="s1">내용</span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea id="qaContent" placeholder="<span class="s1">문의</span> <span class="s1">내용을</span> <span class="s1">입력해주세요</span>"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="form-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="secret-check"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="checkbox" id="qaSecret"&gt; <span class="s1">비밀글로</span> <span class="s1">등록</span></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="submit-btn" onclick="submitQa()"&gt;<span class="s1">문의</span> <span class="s1">등록</span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- DM FLOAT BUTTONS --&gt;</p>
-<p class="p1">&lt;div class="dm-float"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;a href="[ig.me](https://ig.me/m/breedollx)" target="_blank" class="dm-btn insta"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;i class="fab fa-instagram"&gt;&lt;/i&gt; Instagram DM</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/a&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;!-- FOOTER --&gt;</p>
-<p class="p1">&lt;footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="footer-inner"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="footer-top"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="footer-brand"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" class="logo" onclick="showSection('shop')"&gt;BREEDOLL&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;<span class="s1">감도</span> <span class="s1">높은</span> <span class="s1">일상을</span> <span class="s1">위한</span> <span class="s1">패션</span> · <span class="s1">스킨케어</span> <span class="s1">큐레이션</span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="margin-top:8px"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="color:var(--gray);text-decoration:none"&gt;&lt;i class="fab fa-instagram"&gt;&lt;/i&gt; @breedollx&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="footer-links"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h5&gt;SHOP&lt;/h5&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">패션</span>')"&gt;Fashion&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">의류</span>')"&gt;Clothing&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">액세서리</span>')"&gt;Accessories&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showSection('shop');filterProd('<span class="s1">스킨케어</span>')"&gt;Skincare&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="footer-links"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h5&gt;SUPPORT&lt;/h5&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showSection('qa')"&gt;1:1 <span class="s1">문의</span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showModal('terms')"&gt;<span class="s1">이용약관</span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showModal('privacy')"&gt;<span class="s1">개인정보처리방침</span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" onclick="showModal('refund')"&gt;<span class="s1">환불</span>/<span class="s1">취소</span> <span class="s1">정책</span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="biz-info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;strong&gt;BREEDOLL&lt;/strong&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span><span class="s1">대표자</span> : <span class="s1">노혜리</span> &amp;nbsp;|&amp;nbsp; <span class="s1">사업자등록번호</span> : 313-11-86866&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span><span class="s1">통신판매업신고</span> : <span class="s1">제</span>2024-<span class="s1">서울강남</span>-XXXX<span class="s1">호</span>&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span><span class="s1">주소</span> : <span class="s1">서울특별시</span> <span class="s1">강남구</span> <span class="s1">영동대로</span>138<span class="s1">길</span> 9, 202-<span class="s1">가</span>&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span><span class="s1">이메일</span> : &lt;a href="mailto:breecoffee20@gmail.com" style="color:var(--gray)"&gt;breecoffee20@gmail.com&lt;/a&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span><span class="s1">인스타그램</span> : &lt;a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="color:var(--gray)"&gt;@breedollx&lt;/a&gt;&lt;br&gt;&lt;br&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="pg-logos"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="pg-logo"&gt;INICIS&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="pg-logo"&gt;KA</p>
-</body>
-</html>
+
+<!-- SIDE MENU -->
+<div class="side-menu" id="sideMenu">
+  <div class="side-top">
+    <a href="#" class="logo">BREEDOLL</a>
+    <button class="side-close" onclick="closeSide()"><i class="fa fa-times"></i></button>
+  </div>
+  <div class="side-links">
+    <a href="#" onclick="showSection('about');closeSide()">About</a>
+    <a href="#" onclick="showSection('shop');closeSide()">Shop</a>
+    <a href="#" onclick="showSection('community');closeSide()">Community</a>
+    <a href="#" onclick="showSection('qa');closeSide()">1:1 Q&A</a>
+  </div>
+  <div class="side-sub">
+    <h5>SHOP CATEGORY</h5>
+    <a href="#" onclick="showSection('shop');filterProd('패션');closeSide()">Fashion</a>
+    <a href="#" onclick="showSection('shop');filterProd('의류');closeSide()">Clothing</a>
+    <a href="#" onclick="showSection('shop');filterProd('액세서리');closeSide()">Accessories</a>
+    <a href="#" onclick="showSection('shop');filterProd('스킨케어');closeSide()">Skincare</a>
+  </div>
+  <div class="side-sub" style="margin-top:30px">
+    <a href="#" onclick="showSection('qa');closeSide()" style="font-size:12px;color:var(--gray);letter-spacing:1px">📋 1:1 문의하기</a>
+    <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="font-size:12px;color:var(--gray);letter-spacing:1px;margin-top:8px">📷 @breedollx</a>
+  </div>
+</div>
+<div class="overlay" id="overlay" onclick="closeSide();closeCart()"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <button class="hamburger" onclick="openSide()"><i class="fa fa-bars"></i></button>
+    <a href="#" class="logo" onclick="showSection('shop')">BREEDOLL</a>
+    <div class="header-right">
+      <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank"><i class="fab fa-instagram"></i></a>
+      <button onclick="openCart()"><i class="fa fa-shopping-bag"></i><span class="cart-badge" id="cartBadge">0</span></button>
+    </div>
+  </div>
+</header>
+
+<!-- FIXED CATEGORY TAB -->
+<nav class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="#" id="tab-about" onclick="showSection('about')">About</a>
+    <a href="#" id="tab-shop" class="active" onclick="showSection('shop')">Shop</a>
+    <a href="#" id="tab-community" onclick="showSection('community')">Community</a>
+    <a href="#" id="tab-qa" onclick="showSection('qa')">1:1 Q&A</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <div class="about-wrap">
+      <h2>BREEDOLL</h2>
+      <p>안녕하세요, BREEDOLL입니다.<br>일상의 감도를 높이는 패션, 의류, 액세서리, 스킨케어를 큐레이션합니다.</p>
+      <p>감각적이고 실용적인 아이템을 직접 사용해보고 선별하여 소개합니다.<br>나만의 무드를 담은 라이프스타일을 함께 만들어가요.</p>
+      <p>대표 : 노혜리 &nbsp;|&nbsp; @breedollx</p>
+      <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" class="ig-btn">
+        <i class="fab fa-instagram"></i> @breedollx
+      </a>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+  <div class="section active" id="shop">
+    <div class="shop-top">
+      <div class="filter-btns">
+        <button class="active" onclick="filterProd('all',this)">ALL</button>
+        <button onclick="filterProd('패션',this)">FASHION</button>
+        <button onclick="filterProd('의류',this)">CLOTHING</button>
+        <button onclick="filterProd('액세서리',this)">ACCESSORIES</button>
+        <button onclick="filterProd('스킨케어',this)">SKINCARE</button>
+      </div>
+      <div class="sort-sel">
+        <select onchange="sortProd(this.value)">
+          <option value="newest">신상품순</option>
+          <option value="low">낮은가격순</option>
+          <option value="high">높은가격순</option>
+        </select>
+      </div>
+    </div>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+
+  <!-- COMMUNITY -->
+  <div class="section" id="community">
+    <div class="comm-header">
+      <h2>INSTAGRAM</h2>
+      <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank">@breedollx &nbsp;<i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="ig-grid" id="igGrid"></div>
+    <div class="ig-notice">
+      <p>실제 인스타그램 피드를 연동하려면 Instagram Basic Display API 또는<br>
+      <a href="[behold.so](https://behold.so)" target="_blank">behold.so</a> / <a href="[instafeed.js.org](https://instafeed.js.org)" target="_blank">instafeed.js</a> 등의 서비스를 통해 연동하세요.<br>
+      인스타그램 계정 : <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank">@breedollx</a></p>
+    </div>
+  </div>
+
+  <!-- Q&A -->
+  <div class="section" id="qa">
+    <div class="qa-top">
+      <h3>1:1 Q&A</h3>
+      <button class="qa-write-btn" onclick="document.getElementById('writeModal').classList.add('show')">문의 작성하기</button>
+    </div>
+    <div class="qa-list" id="qaList"></div>
+  </div>
+
+</main>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-top">
+    <h3>CART</h3>
+    <button class="cart-close" onclick="closeCart()"><i class="fa fa-times"></i></button>
+  </div>
+  <div id="cartContent"></div>
+  <div id="cartFooter"></div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="prod-modal-bg" id="prodModal">
+  <button class="prod-modal-close" onclick="closeProdModal()"><i class="fa fa-times"></i></button>
+  <div class="prod-modal" id="prodModalInner"></div>
+</div>
+
+<!-- WRITE MODAL -->
+<div class="modal-bg" id="writeModal">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('writeModal').classList.remove('show')"><i class="fa fa-times"></i></button>
+    <h3>문의하기</h3>
+    <div class="form-row">
+      <label>문의 유형</label>
+      <select id="qaType">
+        <option value="product">상품 문의</option>
+        <option value="shipping">배송 문의</option>
+        <option value="other">기타 문의</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>이름</label>
+      <input type="text" id="qaName" placeholder="이름을 입력해주세요">
+    </div>
+    <div class="form-row">
+      <label>제목</label>
+      <input type="text" id="qaSubject" placeholder="제목을 입력해주세요">
+    </div>
+    <div class="form-row">
+      <label>내용</label>
+      <textarea id="qaContent" placeholder="문의 내용을 입력해주세요"></textarea>
+    </div>
+    <div class="form-row">
+      <label class="secret-check">
+        <input type="checkbox" id="qaSecret"> 비밀글로 등록
+      </label>
+    </div>
+    <button class="submit-btn" onclick="submitQa()">문의 등록</button>
+  </div>
+</div>
+
+<!-- DM FLOAT BUTTONS -->
+<div class="dm-float">
+  <a href="[ig.me](https://ig.me/m/breedollx)" target="_blank" class="dm-btn insta">
+    <i class="fab fa-instagram"></i> Instagram DM
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo" onclick="showSection('shop')">BREEDOLL</a>
+        <p>감도 높은 일상을 위한 패션 · 스킨케어 큐레이션</p>
+        <p style="margin-top:8px">
+          <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="color:var(--gray);text-decoration:none"><i class="fab fa-instagram"></i> @breedollx</a>
+        </p>
+      </div>
+      <div class="footer-links">
+        <h5>SHOP</h5>
+        <a href="#" onclick="showSection('shop');filterProd('패션')">Fashion</a>
+        <a href="#" onclick="showSection('shop');filterProd('의류')">Clothing</a>
+        <a href="#" onclick="showSection('shop');filterProd('액세서리')">Accessories</a>
+        <a href="#" onclick="showSection('shop');filterProd('스킨케어')">Skincare</a>
+      </div>
+      <div class="footer-links">
+        <h5>SUPPORT</h5>
+        <a href="#" onclick="showSection('qa')">1:1 문의</a>
+        <a href="#" onclick="showModal('terms')">이용약관</a>
+        <a href="#" onclick="showModal('privacy')">개인정보처리방침</a>
+        <a href="#" onclick="showModal('refund')">환불/취소 정책</a>
+      </div>
+    </div>
+
+    <div class="biz-info">
+      <strong>BREEDOLL</strong><br>
+      대표자 : 노혜리 &nbsp;|&nbsp; 사업자등록번호 : 313-11-86866<br>
+      통신판매업신고 : 제2024-서울강남-XXXX호<br>
+      주소 : 서울특별시 강남구 영동대로138길 9, 202-가<br>
+      이메일 : <a href="mailto:breecoffee20@gmail.com" style="color:var(--gray)">breecoffee20@gmail.com</a><br>
+      인스타그램 : <a href="[instagram.com](https://instagram.com/breedollx)" target="_blank" style="color:var(--gray)">@breedollx</a><br><br>
+
+      <div class="pg-logos">
+        <span class="pg-logo">INICIS</span>
+        <span class="pg-logo">KA
